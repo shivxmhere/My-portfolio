@@ -1,71 +1,106 @@
-# Shivam Singh — Portfolio
+# Shivam Singh | Portfolio
 
-A cinematic,themed personal portfolio website showcasing my projects, certifications, achievements, and resume.
+A dynamic, fully responsive, and highly interactive developer portfolio built with React, Vite, Tailwind CSS, and Framer Motion. This portfolio showcases my journey, skills, featured projects, and live GitHub activity in a sleek, modern, and theme-adaptive user interface.
 
-**Live:** [shivamsingh-iit-patna-portfolio.vercel.app](https://shivamsingh-iit-patna-portfolio.vercel.app)
+## 🌐 Live Demo
 
-## Overview
+**[shivamsingh-iit-patna-portfolio.vercel.app](https://shivamsingh-iit-patna-portfolio.vercel.app/)**
 
-Built as a single-page application with smooth scroll-based animations, interactive hover/touch effects, and a grayscale-to-color visual style. The site features a hero section with an animated profile image, project showcase, timeline, certificates gallery, achievements, and a downloadable resume.
+## ✨ Key Features
 
-## Tech Stack
+- **Multi-Theme System:** Seamless, animated switching between three distinct themes ("Dark Intelligence", "Light Precision", and "Neon Cyber").
+- **Dynamic Physics Particles:** Interactive hero background utilizing `tsparticles` customized to look like neural network constellation links depending on the theme.
+- **Glassmorphism UI:** Modern frosted glass container effects paired with neon glow accents.
+- **Framer Motion Animations:** Smooth layout transitions, staggered reveals, scroll-linked animations, pop-layout rendering, and spring-based interactions scattered gracefully across all components.
+- **Custom Cursor:** A glowing orbital cursor that intelligently expands and reacts when hovering over interactable elements.
+- **GitHub API Integration:** Live, automated fetching of user contribution graphs, repository statistics, and most used language metrics directly from GitHub via `github-readme-stats` and `ghchart`.
+- **Serverless Contact Form:** Fully functional "direct-to-inbox" contact form powered by `FormSubmit.co` requiring zero backend configuration.
+- **Optimized SEO:** Embedded metadata, Open Graph cards, standard `robots.txt`, and `sitemap.xml` specifically optimized for strong search engine presence.
+- **Performant & Responsive:** Fluid scaling typography and UI structures tailored natively from 320px mobile screens up through 4K displays.
 
-| Category | Technology |
-|----------|-----------|
-| **Framework** | React 19 + TypeScript |
-| **Build Tool** | Vite |
-| **Styling** | Tailwind CSS 4 |
-| **Animations** | Framer Motion |
-| **Routing** | React Router DOM |
-| **Deployment** | Vercel |
-| **SEO** | JSON-LD Structured Data, Open Graph, Sitemap |
+## 🛠️ Technologies Used
 
-## Features
+### Core
+- **React 18** (Functional components, Hooks)
+- **TypeScript** (Strict typing environment)
+- **Vite** (Next-generation lightning-fast frontend tooling)
 
-- **Cinematic Hero** — Animated profile image with grayscale-to-color effect, sparkle particles on hover/touch
-- **Project Showcase** — Grid layout with project details, tags, and links
-- **Certificates Gallery** — Interactive cards with grayscale-to-color transition on hover and touch
-- **Timeline** — Academic and professional milestones
-- **Resume** — View and download PDF resume directly
-- **Responsive** — Fully optimized for desktop and mobile with touch support
-- **SEO Optimized** — Structured data, meta tags, sitemap, and robots.txt
+### Styling & UI
+- **Tailwind CSS** (Utility-first CSS framework coupled with extensive custom root variables)
+- **Framer Motion** (Production-ready animation and gesture library)
+- **Lucide React** (Beautiful & consistent SVG icon pack)
 
-## Development
+### Specialized Libraries
+- **tsparticles** (High-performance particle engine used in the Hero mesh)
+- **Lenis** (Incredibly smooth scroll interpolation)
+- **React DOM & ReactDOM/server** (For portal rendering custom overlays like modals)
 
+## 📦 Project Structure
+
+```text
+├── public/                 # Static assets (images, icons, robots.txt, sitemap.xml)
+├── src/
+│   ├── components/         # Reusable UI abstractions
+│   │   ├── Header.tsx      # Sticky navigation bar & theme controls
+│   │   ├── Hero.tsx        # Title block & particle network canvas
+│   │   ├── About.tsx       # Bio and counting statistics
+│   │   ├── Skills.tsx      # Interactive skill orbits
+│   │   ├── Projects.tsx    # Filterable project gallery cards
+│   │   ├── Timeline.tsx    # Responsive experience & education tracker
+│   │   ├── Achievements.tsx# Certifications and honors carousel
+│   │   ├── GithubActivity.tsx # API hooked GitHub metrics chart
+│   │   ├── Contact.tsx     # FormSubmit.co connected contact form
+│   │   ├── Footer.tsx      # Outro wrapper with hidden Matrix rain easter egg
+│   │   ├── CustomCursor.tsx# Animated custom mouse follower
+│   │   ├── ThemeSwitcher.tsx # Color theme selection GUI
+│   │   └── AnimatedProfileLogo.tsx # High-res zoomable avatar modal
+│   ├── App.tsx             # Root application orchestrator
+│   ├── index.css           # Contains all Tailwind directives and deep CSS variables
+│   └── main.tsx            # React mounting execution context
+├── .env.example            # Environment variables template
+├── index.html              # Core skeleton, external font links, SEO tags
+├── tailwind.config.js      # Custom theme expansions and keyframes
+├── tsconfig.json           # Type configurations
+└── vite.config.ts          # Bundler optimization rules
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) installed on your machine (`v16.0.0` or higher recommended).
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/shivxmhere/shivxmhere.github.io.git
+   cd shivxmhere.github.io
+   ```
+   *(Note: Adjust the repo name depending on your actual repository path)*
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser:**
+   Navigate to `http://localhost:5173/` to interact with the application locally.
+
+### Building for Production
+To generate a heavily optimized, minified production distribution bundle:
 ```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npx vite build
+npm run build
 ```
+This generates a `./dist` folder which is ready for deployment across any static hosting service (Vercel, Netlify, GitHub Pages, etc).
 
-## Project Structure
+## 🪪 License
 
-```
-src/
-├── components/
-│   ├── Hero.tsx           # Animated hero section with profile image
-│   ├── Projects.tsx       # Project showcase grid
-│   ├── Timeline.tsx       # Academic/professional timeline
-│   ├── Certificates.tsx   # Interactive certificate gallery
-│   ├── Achievements.tsx   # Achievements section
-│   ├── Resume.tsx         # Resume viewer and download
-│   ├── Header.tsx         # Navigation header
-│   ├── Footer.tsx         # Footer with social links
-│   ├── Layout.tsx         # Page layout wrapper
-│   └── MagicText.tsx      # Animated text component
-├── pages/
-│   └── Home.tsx           # Main page assembling all sections
-└── main.tsx               # App entry point
-```
+This project is open-source and available under the [MIT License](LICENSE).
 
-## Author
-
-**Shivam Singh**
-- IIT Patna — Computer Science & Data Analytics
-- GitHub: [@shivxmhere](https://github.com/shivxmhere)
-- LinkedIn: [shivam-singh-iit-patna](https://www.linkedin.com/in/shivam-singh-iit-patna/)
+---
+**Designed and Built by Shivam Singh**
