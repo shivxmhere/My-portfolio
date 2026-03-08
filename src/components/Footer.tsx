@@ -1,108 +1,133 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { Instagram, Linkedin, Github, ExternalLink } from 'lucide-react';
-import MagicText from './MagicText';
+import React, { useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ChevronUp } from 'lucide-react';
 
-export default function Footer() {
+// Easter egg: Binary Rain
+function BinaryRain() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Set canvas dimensions
+    const resizeCanvas = () => {
+      // Adjust resolution for sharpness and scaling
+      canvas.width = window.innerWidth;
+      // We only need the canvas to cover the footer height which is small, but let's make it fixed size relative to container
+      canvas.height = 300;
+    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const chars = '01';
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
+
+    // Check if current theme is light or dark (rough guess based on document body data attribute)
+    // We'll just define the color using CSS variables inside the draw function if possible, but 
+    // canvas doesn't auto-update CSS vars dynamically easily without getComputedStyle.
+    // Instead, we'll draw with a fixed very low opacity color that works on both, or query the element.
+
+    const draw = () => {
+      // Create a slight trailing effect
+      ctx.fillStyle = 'rgba(bg-primary-fallback, 0.05)'; // We'll just clear it completely to be safe with themes
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = `${fontSize}px monospace`;
+
+      // Get computing style for accent color
+      const computedStyle = getComputedStyle(document.documentElement);
+      const accent1 = computedStyle.getPropertyValue('--accent-1').trim() || '#00d4ff';
+
+      ctx.fillStyle = accent1;
+      ctx.globalAlpha = 0.05; // Very subtle
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    };
+
+    const interval = setInterval(draw, 50);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', resizeCanvas);
+    };
+  }, []);
+
   return (
-    <footer id="contact" className="bg-[var(--bg-primary)] text-[var(--text-main)] px-6 py-20 md:py-32 min-h-[80vh] flex flex-col justify-between relative overflow-hidden transition-colors duration-400 border-t border-[var(--card-bg)]">
-      {/* Background Gradient Mesh */}
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[var(--accent-2)] opacity-20 blur-[150px] rounded-full pointer-events-none" />
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8 flex-grow z-10">
-        {/* Left Panel - The Human Element */}
-        <div className="flex flex-col justify-center space-y-12">
-          <div className="space-y-4">
-            <h3 className="text-[var(--text-main)] opacity-70 text-sm uppercase tracking-widest flex items-center gap-2">
-              <span className="w-2 h-2 bg-[var(--accent-1)] rounded-full animate-pulse"></span>
-              Currently Listening To
-            </h3>
-            <motion.a
-              href="https://music.youtube.com/playlist?list=PLE0Jo6NF_JYO5-phess8GKafKMtPv3tfZ&si=IIjhVL5R2xtKoCMM"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.02 }}
-              className="flex items-center gap-4 p-4 border border-[var(--card-bg)] rounded-xl bg-[var(--card-bg)] shadow-lg max-w-md hover:border-[var(--accent-1)] transition-colors duration-300 cursor-pointer group backdrop-blur-md"
-            >
-              <div className="w-16 h-16 bg-[var(--bg-primary)] rounded-lg overflow-hidden relative flex-shrink-0 flex items-center justify-center border border-[var(--card-bg)]">
-                {/* Raj Shamani / YouTube Music Icon */}
-                <img src="https://yt3.googleusercontent.com/strLdMSfOLMsaJU50IFOnVXgzolGmGSbtmczTIEi_gFt7IX6sBqNDGBM6AKzCCBDAN5weIBE=s900-c-k-c0x00ffffff-no-rj" alt="Raj Shamani" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity absolute inset-0 image-invert-wrapper" />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] group-hover:bg-black/20 transition-all duration-300">
-                  {/* Clean opaque Youtube Icon */}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="12" r="11" fill="#FF0000" />
-                    <polygon points="10,8 16,12 10,16" fill="#FFFFFF" />
-                  </svg>
-                </div>
-              </div>
-              <div>
-                <p className="text-lg font-medium group-hover:text-[var(--accent-1)] transition-colors">Raj Shamani Podcast</p>
-                <p className="text-[var(--text-main)] opacity-70 text-sm flex items-center gap-1">
-                  YouTube Music <ExternalLink size={12} />
-                </p>
-              </div>
-            </motion.a>
-          </div>
-
-          <div className="space-y-8">
-            <div className="group cursor-default">
-              <h3 className="text-[var(--text-main)] opacity-70 text-sm uppercase tracking-widest mb-2 group-hover:text-[var(--accent-1)] transition-colors">Currently Watching</h3>
-              <MagicText text="CodeWithHarry" className="text-2xl font-mono text-[var(--text-main)] group-hover:translate-x-2 transition-transform duration-300" />
-            </div>
-            <div className="group cursor-default">
-              <h3 className="text-[var(--text-main)] opacity-70 text-sm uppercase tracking-widest mb-2 group-hover:text-[var(--accent-1)] transition-colors">Daily Fuel</h3>
-              <MagicText text="Reading 'Atomic Habits'" className="text-xl font-mono text-[var(--text-main)] group-hover:translate-x-2 transition-transform duration-300" />
-            </div>
-          </div>
-        </div>
-
-        {/* Right Panel - Contact */}
-        <div className="flex flex-col justify-center items-start md:items-end text-left md:text-right">
-          <MagicText text="Let's" tag="h2" className="text-4xl md:text-6xl lg:text-8xl font-bold leading-none tracking-tighter text-[var(--text-main)]" />
-          <MagicText text="Connect." tag="h2" className="text-4xl md:text-6xl lg:text-8xl font-bold leading-none tracking-tighter mb-8 text-[var(--accent-1)]" delay={0.2} />
-
-          <a
-            href="mailto:shivamhere6257@gmail.com"
-            className="text-xl md:text-3xl font-mono border-b border-[var(--text-main)] pb-2 hover:text-[var(--accent-1)] hover:border-[var(--accent-1)] transition-all duration-300"
-          >
-            shivamhere6257@gmail.com
-          </a>
-        </div>
-      </div>
-
-      <div className="mt-20 border-t border-[var(--card-bg)] pt-12 z-10">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="text-sm text-[var(--text-main)] opacity-70 uppercase font-mono tracking-widest">
-            &copy; {new Date().getFullYear()} Shivam Singh
-          </div>
-
-          <div className="flex gap-6">
-            <SocialLink href="https://www.linkedin.com/in/shivam-singh-iit-patna/" icon={<Linkedin size={20} />} label="LinkedIn" />
-            <SocialLink href="https://github.com/shivxmhere" icon={<Github size={20} />} label="GitHub" />
-            <SocialLink href="https://instagram.com/shivxm._.s" icon={<Instagram size={20} />} label="Instagram" />
-          </div>
-        </div>
-      </div>
-    </footer>
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none z-0"
+      style={{ opacity: 0.6 }}
+    />
   );
 }
 
-function SocialLink({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) {
+export default function Footer() {
+  const [showTopBtn, setShowTopBtn] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 500) {
+        setShowTopBtn(true);
+      } else {
+        setShowTopBtn(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
-    <motion.a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      whileHover={{ y: -5 }}
-      className="flex items-center gap-2 text-[var(--text-main)] hover:text-[var(--accent-1)] transition-colors group"
-    >
-      <div className="p-3 border border-[var(--card-bg)] rounded-full bg-[var(--card-bg)] group-hover:border-[var(--accent-1)] shadow-sm transition-colors">
-        {icon}
+    <footer className="relative bg-[var(--bg-secondary)] text-[var(--text-main)] transition-colors duration-400 border-t border-[var(--card-bg)] py-12 overflow-hidden flex flex-col items-center justify-center">
+      <BinaryRain />
+
+      <div className="relative z-10 flex flex-col items-center justify-center max-w-7xl mx-auto px-6 text-center gap-4">
+        <h3 className="text-xl md:text-2xl font-[family-name:--font-display] font-bold tracking-tight">
+          Designed & Built by Shivam Singh &copy; 2025
+        </h3>
+
+        <p className="font-mono text-sm text-[var(--accent-1)] tracking-widest uppercase">
+          IIT Patna — CS & Data Analytics
+        </p>
       </div>
-      <span className="text-sm font-mono tracking-widest font-medium hidden md:block opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300 text-[var(--accent-1)]">
-        {label}
-      </span>
-    </motion.a>
+
+      <AnimatePresence>
+        {showTopBtn && (
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            whileHover={{ scale: 1.1, y: -5 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 z-50 p-4 bg-[var(--card-bg)] border border-[var(--accent-1)] rounded-xl shadow-[0_0_15px_rgba(var(--accent-1),0.3)] hover:shadow-[0_0_25px_var(--accent-1)] text-[var(--accent-1)] backdrop-blur-md transition-shadow group flex items-center justify-center"
+            aria-label="Scroll to top"
+          >
+            <ChevronUp size={24} className="group-hover:-translate-y-1 transition-transform" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+    </footer>
   );
 }
 

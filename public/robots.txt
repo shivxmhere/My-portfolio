@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+
 Sitemap: https://shivamsingh-iit-patna-portfolio.vercel.app/sitemap.xml

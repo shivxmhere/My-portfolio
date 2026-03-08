@@ -3,9 +3,10 @@ import Header from '../components/Header';
 import Hero from '../components/Hero';
 import Projects from '../components/Projects';
 import Timeline from '../components/Timeline';
-import Certificates from '../components/Certificates';
 import Achievements from '../components/Achievements';
 import Resume from '../components/Resume';
+import GithubActivity from '../components/GithubActivity';
+import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 
 export default function Home() {
@@ -13,11 +14,12 @@ export default function Home() {
     <Layout>
       <Header />
       <Hero />
+      <Resume />
       <Projects />
       <Timeline />
-      <Certificates />
       <Achievements />
-      <Resume />
+      <GithubActivity />
+      <Contact />
       <Footer />
     </Layout>
   );

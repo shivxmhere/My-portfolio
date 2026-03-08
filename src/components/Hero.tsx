@@ -1,49 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useAnimation, useInView } from 'motion/react';
 import HeroParticles from './HeroParticles';
+import Typed from 'typed.js';
 
 function Typewriter({ words }: { words: string[] }) {
-  const [index, setIndex] = useState(0);
-  const [subIndex, setSubIndex] = useState(0);
-  const [reverse, setReverse] = useState(false);
-  const [blink, setBlink] = useState(true);
+  const el = useRef(null);
 
-  // Blinking cursor
   useEffect(() => {
-    const timeout = setTimeout(() => setBlink((prev) => !prev), 500);
-    return () => clearTimeout(timeout);
-  }, [blink]);
+    const typed = new Typed(el.current, {
+      strings: words,
+      typeSpeed: 50,
+      backSpeed: 30,
+      backDelay: 2000,
+      loop: true,
+      cursorChar: '_',
+      showCursor: true,
+    });
 
-  // Typing logic
-  useEffect(() => {
-    if (index === words.length) {
-      setIndex(0);
-      return;
-    }
-
-    if (subIndex === words[index].length + 1 && !reverse) {
-      const waitTime = setTimeout(() => setReverse(true), 2000);
-      return () => clearTimeout(waitTime);
-    }
-
-    if (subIndex === 0 && reverse) {
-      setReverse(false);
-      setIndex((prev) => prev + 1);
-      return;
-    }
-
-    const timeout = setTimeout(
-      () => setSubIndex((prev) => prev + (reverse ? -1 : 1)),
-      Math.max(reverse ? 30 : 50, Math.random() * (reverse ? 75 : 150))
-    );
-
-    return () => clearTimeout(timeout);
-  }, [subIndex, index, reverse, words]);
+    return () => {
+      typed.destroy();
+    };
+  }, [words]);
 
   return (
-    <span className="text-[var(--text-main)] font-mono text-xl md:text-3xl font-regular">
-      {`> ${words[index] ? words[index].substring(0, subIndex) : ''}`}
-      <span className={`${blink ? 'opacity-100' : 'opacity-0'} text-[var(--accent-1)] transition-opacity`}>_</span>
+    <span className="text-[var(--text-main)] font-mono text-xl md:text-3xl font-regular inline-block h-10">
+      <span className="text-[var(--accent-1)]">{">"}</span> <span ref={el}></span>
     </span>
   );
 }
@@ -51,17 +32,55 @@ function Typewriter({ words }: { words: string[] }) {
 export default function Hero() {
   const roles = [
     "Data Analyst",
-    "AI/ML Developer",
-    "IIT Patna — CSDA",
+    "AI / ML Developer",
+    "IIT Patna — CS & Data Analytics",
     "Full Stack Builder",
     "Generative AI Explorer"
   ];
 
-  const floatingTags = ["Python", "React", "ML", "FastAPI", "SQL", "AWS"];
+  const floatingTags = ["Python", "React", "ML", "FastAPI", "SQL", "AWS", "NLP", "Next.js"];
+
+  // Magnetic button component
+  const MagneticButton = ({ children, className, href, outlined = false }: any) => {
+    const ref = useRef<HTMLAnchorElement>(null);
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+
+    const handleMouse = (e: React.MouseEvent<HTMLAnchorElement>) => {
+      const { clientX, clientY } = e;
+      const { height, width, left, top } = ref.current!.getBoundingClientRect();
+      const middleX = clientX - (left + width / 2);
+      const middleY = clientY - (top + height / 2);
+      setPosition({ x: middleX * 0.2, y: middleY * 0.2 });
+    };
+
+    const reset = () => {
+      setPosition({ x: 0, y: 0 });
+    };
+
+    return (
+      <motion.a
+        ref={ref}
+        href={href}
+        onMouseMove={handleMouse}
+        onMouseLeave={reset}
+        animate={{ x: position.x, y: position.y }}
+        transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+        className={`px-8 py-4 rounded-md text-[13px] font-mono font-bold tracking-widest transition-all duration-300 relative group overflow-hidden ${outlined
+            ? "border-2 border-[var(--accent-1)] text-[var(--accent-1)] bg-transparent hover:shadow-[0_0_20px_var(--accent-1)] hover:bg-[var(--accent-1)] hover:text-[var(--bg-primary)]"
+            : "bg-[var(--accent-1)] text-[var(--bg-primary)] hover:shadow-[0_0_20px_var(--accent-1)]"
+          } ${className}`}
+      >
+        <span className="relative z-10">{children}</span>
+      </motion.a>
+    );
+  };
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 md:px-12 lg:px-24 bg-[var(--bg-primary)] text-[var(--text-main)] transition-colors duration-400">
+    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden w-full bg-[var(--bg-primary)] text-[var(--text-main)] transition-colors duration-400">
+      {/* Background Elements */}
       <HeroParticles />
+      <div className="absolute inset-0 bg-white/5 opacity-[0.04] mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--accent-1)_0%,transparent_50%)] opacity-[0.03] animate-pulse"></div>
 
       {/* Floating Tech Tags */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden hidden md:block">
@@ -70,21 +89,21 @@ export default function Hero() {
             key={tag}
             initial={{ opacity: 0, scale: 0 }}
             animate={{
-              opacity: 0.1,
+              opacity: 0.15,
               scale: 1,
-              y: [Math.random() * 50 - 25, Math.random() * -50 - 25],
-              x: Math.random() * 50 - 25,
+              y: [Math.random() * 60 - 30, Math.random() * -60 - 30],
+              x: Math.random() * 60 - 30,
             }}
             transition={{
-              duration: Math.random() * 5 + 10,
-              repeat: Infinity,
-              repeatType: 'reverse',
-              delay: i * 0.4
+              opacity: { delay: 1.1 + i * 0.1, duration: 0.5 },
+              scale: { delay: 1.1 + i * 0.1, duration: 0.5 },
+              y: { duration: Math.random() * 5 + 15, repeat: Infinity, repeatType: 'reverse' },
+              x: { duration: Math.random() * 5 + 15, repeat: Infinity, repeatType: 'reverse' }
             }}
-            className="absolute text-5xl lg:text-8xl font-mono font-bold text-[var(--text-main)] mix-blend-overlay"
+            className="absolute text-5xl lg:text-7xl font-mono font-bold text-[var(--accent-1)] mix-blend-screen"
             style={{
-              left: `${15 + (i * 15)}%`,
-              top: `${20 + Math.random() * 60}%`
+              left: `${10 + (i * 11)}%`,
+              top: `${15 + Math.random() * 70}%`
             }}
           >
             {tag}
@@ -92,25 +111,35 @@ export default function Hero() {
         ))}
       </div>
 
-      <div className="z-10 flex flex-col items-center text-center mt-20">
-        {/* Giant animated name with gradient shimmer sweep */}
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-6xl md:text-8xl lg:text-[7rem] font-bold leading-[1.1] tracking-tighter mb-4"
+      <div className="z-10 flex flex-col items-center text-center mt-20 px-4 max-w-5xl">
+        {/* Monospace label */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="text-[var(--accent-1)] font-mono text-[13px] tracking-widest mb-6"
         >
-          <span className="inline-block relative text-transparent bg-clip-text bg-[linear-gradient(110deg,var(--text-main),40%,var(--accent-1),55%,var(--text-main))] bg-[length:250%_100%] animate-shimmer">
+          {"<< shivam_singh.exe >>"}
+        </motion.div>
+
+        {/* Giant animated name */}
+        <motion.h1
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="text-6xl md:text-[96px] font-[family-name:--font-display] font-bold leading-[1.1] tracking-tighter mb-6 w-full"
+        >
+          <span className="inline-block relative text-transparent bg-clip-text bg-[linear-gradient(135deg,var(--accent-1),var(--accent-2))] bg-[length:250%_100%] animate-shimmer">
             SHIVAM SINGH
           </span>
         </motion.h1>
 
         {/* Typewriter Effect */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="h-12 mb-12 flex justify-center items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="mb-12 flex justify-center items-center font-mono w-full"
         >
           <Typewriter words={roles} />
         </motion.div>
@@ -119,23 +148,15 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
           className="flex flex-col sm:flex-row gap-6 mt-8"
         >
-          <a
-            href="#work"
-            className="px-8 py-4 bg-[var(--accent-1)] text-[var(--bg-primary)] rounded-md text-sm font-bold uppercase tracking-widest hover:opacity-80 transition-opacity duration-300 relative group overflow-hidden"
-          >
-            <span className="relative z-10">View My Work ↓</span>
-          </a>
-          <a
-            href="/Shivam_Singh_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-4 border border-[var(--text-main)] text-[var(--text-main)] bg-transparent rounded-md text-sm font-bold uppercase tracking-widest hover:border-[var(--accent-2)] hover:text-[var(--accent-2)] transition-all duration-300 backdrop-blur-sm"
-          >
+          <MagneticButton href="#projects" outlined={false}>
+            View My Work ↓
+          </MagneticButton>
+          <MagneticButton href="/Shivam_Singh_Resume.pdf" outlined={true}>
             Download Resume ↗
-          </a>
+          </MagneticButton>
         </motion.div>
       </div>
 
@@ -146,13 +167,13 @@ export default function Hero() {
         transition={{ delay: 2, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center"
       >
-        <div className="w-[1px] h-16 bg-[var(--card-bg)] overflow-hidden relative">
-          <motion.div
-            animate={{ top: ['-100%', '100%'] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-            className="w-full h-1/2 bg-[var(--text-main)] absolute left-0"
-          />
-        </div>
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="text-[var(--accent-1)] text-2xl font-light"
+        >
+          ∨
+        </motion.div>
       </motion.div>
     </section>
   );

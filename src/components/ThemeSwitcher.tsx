@@ -30,20 +30,24 @@ export default function ThemeSwitcher() {
     ];
 
     return (
-        <div className="flex flex-col gap-3 p-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10">
+        <div className="flex flex-row md:flex-col gap-3 p-2 rounded-full bg-[var(--card-bg)] backdrop-blur-md border border-[var(--card-border)] transition-colors duration-400 z-50">
             {themes.map((t) => (
                 <button
                     key={t.id}
                     onClick={() => handleThemeChange(t.id as Theme)}
-                    className="relative group w-6 h-6 rounded-full transition-transform hover:scale-110"
+                    className="relative group w-6 h-6 rounded-full transition-all duration-400 ease-in-out hover:scale-110"
                     style={{
                         backgroundColor: t.color,
-                        boxShadow: theme === t.id ? `0 0 0 2px var(--bg-primary), 0 0 0 4px ${t.border}` : 'inset 0 0 0 1px rgba(255,255,255,0.2)'
+                        boxShadow: theme === t.id
+                            ? '0 0 0 2px var(--bg-primary), 0 0 0 4px var(--accent-1), 0 0 12px 2px var(--accent-1)'
+                            : t.id === 'hacker'
+                                ? `inset 0 0 0 2px ${t.border}`
+                                : 'inset 0 0 0 1px rgba(128, 128, 128, 0.3)',
                     }}
                     aria-label={`Switch to ${t.label} theme`}
                 >
                     {/* Tooltip */}
-                    <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-2 py-1 text-xs font-mono rounded bg-[var(--text-main)] text-[var(--bg-primary)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                    <span className="absolute md:right-full md:left-auto left-1/2 -translate-x-1/2 md:-translate-x-0 md:mr-4 md:top-1/2 top-full mt-4 md:mt-0 md:-translate-y-1/2 px-2 py-1 text-xs font-mono rounded bg-[var(--text-main)] text-[var(--bg-primary)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
                         {t.label}
                     </span>
                 </button>
