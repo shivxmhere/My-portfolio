@@ -4,7 +4,7 @@ A dynamic, fully responsive, and highly interactive developer portfolio built wi
 
 ## 🌐 Live Demo
 
-**[shivamsingh-iit-patna-portfolio.vercel.app](https://shivamsingh-iit-patna-portfolio.vercel.app/)**
+**[shivamsingh-iitpatna.vercel.app](https://shivamsingh-iitpatna.vercel.app/)**
 
 ## ✨ Key Features
 
@@ -73,8 +73,8 @@ Make sure you have [Node.js](https://nodejs.org/) installed on your machine (`v1
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/shivxmhere/shivxmhere.github.io.git
-   cd shivxmhere.github.io
+   git clone https://github.com/shivxmhere/My-portfolio.git
+   cd My-portfolio
    ```
    *(Note: Adjust the repo name depending on your actual repository path)*
 
