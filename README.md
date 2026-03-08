@@ -1,6 +1,6 @@
 # Shivam Singh — Portfolio
 
-A cinematic, dark-themed personal portfolio website showcasing my projects, certifications, achievements, and resume.
+A cinematic,themed personal portfolio website showcasing my projects, certifications, achievements, and resume.
 
 **Live:** [shivamsingh-iit-patna-portfolio.vercel.app](https://shivamsingh-iit-patna-portfolio.vercel.app)
 
@@ -68,4 +68,4 @@ src/
 **Shivam Singh**
 - IIT Patna — Computer Science & Data Analytics
 - GitHub: [@shivxmhere](https://github.com/shivxmhere)
-- LinkedIn: [shivxmhere](https://linkedin.com/in/shivxmhere)
+- LinkedIn: [shivam-singh-iit-patna](https://www.linkedin.com/in/shivam-singh-iit-patna/)

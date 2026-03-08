@@ -76,7 +76,7 @@ export default function Footer() {
           </div>
 
           <div className="flex gap-6">
-            <SocialLink href="https://www.linkedin.com/in/shivam-singh-2503cdh287" icon={<Linkedin size={20} />} label="LinkedIn" />
+            <SocialLink href="https://www.linkedin.com/in/shivam-singh-iit-patna/" icon={<Linkedin size={20} />} label="LinkedIn" />
             <SocialLink href="https://github.com/shivxmhere" icon={<Github size={20} />} label="GitHub" />
             <SocialLink href="https://instagram.com/shivxm._.s" icon={<Instagram size={20} />} label="shivxm._.s" />
           </div>
