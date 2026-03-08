@@ -114,12 +114,12 @@ export default function GithubActivity() {
                         <h3 className="text-sm font-mono text-[var(--text-muted)] mb-4 flex items-center gap-2 whitespace-nowrap">
                             // Contribution Graph
                         </h3>
-                        {/* We use the github chart API generated image with an invert wrapper if in dark mode so the greens pop accurately */}
+                        {/* Working GitHub Contribution generated image */}
                         <div className="w-full flex justify-center min-w-[700px] rounded-md p-4">
                             <img
-                                src="https://ghchart.rshah.org/shivxmhere"
+                                src="https://github-readme-activity-graph.vercel.app/graph?username=shivxmhere&theme=react&bg_color=050d1a&color=00d4ff&line=7c3aed&point=FFFFFF&hide_border=true"
                                 alt="GitHub Contribution Graph"
-                                className="w-full max-w-[900px] hover:scale-[1.02] transition-transform duration-500 filter drop-shadow-[0_0_15px_rgba(var(--accent-1),0.1)] hue-rotate-[160deg] brightness-150 contrast-125"
+                                className="w-full max-w-[900px] hover:scale-[1.02] transition-transform duration-500 rounded-lg drop-shadow-[0_0_15px_rgba(var(--accent-1),0.1)]"
                             />
                         </div>
                     </div>
