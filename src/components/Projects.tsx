@@ -3,6 +3,14 @@ import MagicText from './MagicText';
 
 const projects = [
   {
+    title: "RAGE OS",
+    category: "Student OS",
+    description: "A comprehensive \"Student Operating System\" designed to replace scattered productivity apps with a unified ecosystem (RISE. ACHIEVE. GROW. EVOLVE.). It deeply integrates essential academic tools into one seamless interface: Pomodoro timer, spaced-repetition flashcards, exam countdown, mood-tracking, OKR management, and an in-context AI tutor. By combining these with detailed analytics (RAGE Report) and visual study heatmaps, it eliminates context-switching, helps build streaks, avoids burnout, and maximizes academic potential.",
+    tags: ["Productivity", "EdTech", "AI Tutor", "Analytics"],
+    year: "Feb 2026",
+    image_url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop"
+  },
+  {
     title: "Krishi-Net",
     category: "AI & Agriculture",
     description: "AI-powered agricultural intelligence platform empowering farmers with crop planning, yield prediction, and decision-making insights. Built to solve real-world farming challenges.",
