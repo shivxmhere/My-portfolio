@@ -27,10 +27,10 @@ const experiences = [
 
 export default function Timeline() {
   return (
-    <section className="py-24 px-6 md:px-12 lg:px-24 bg-[#FDFDFD]">
+    <section id="journey" className="py-24 px-6 md:px-12 lg:px-24 bg-[var(--bg-primary)] text-[var(--text-main)] transition-colors duration-400">
       <MagicText text="Experience & Education" tag="h2" className="text-4xl md:text-6xl font-bold mb-16 tracking-tighter" />
-      
-      <div className="border-t border-[#707070]">
+
+      <div className="border-t border-[var(--card-bg)]">
         {experiences.map((exp, index) => (
           <motion.div
             key={index}
@@ -38,25 +38,25 @@ export default function Timeline() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group grid grid-cols-1 md:grid-cols-12 gap-8 py-12 border-b border-[#707070] hover:bg-[#FDFDFD] transition-colors duration-300 cursor-default items-center"
+            className="group grid grid-cols-1 md:grid-cols-12 gap-8 p-6 md:p-12 border-b border-[var(--card-bg)] hover:bg-[var(--card-bg)] hover:shadow-lg transition-all duration-300 cursor-default items-center rounded-2xl md:rounded-none md:hover:rounded-2xl my-2 md:my-0"
           >
-            <div className="md:col-span-3 text-[#707070] font-mono text-sm uppercase tracking-widest group-hover:text-[#5E3A30] transition-colors">
+            <div className="md:col-span-3 text-[var(--text-main)] opacity-70 font-mono text-sm uppercase tracking-widest group-hover:text-[var(--accent-1)] group-hover:opacity-100 transition-colors">
               {exp.period}
             </div>
-            
+
             <div className="md:col-span-4">
-               <div className="flex items-center gap-4 mb-2">
-                 <div className="w-12 h-12 rounded-full overflow-hidden border border-[#E5E5E5] hidden md:block">
-                   <img src={exp.image} alt={exp.company} className="w-full h-full object-cover" />
-                 </div>
-                 <div>
-                    <h3 className="font-bold text-2xl group-hover:text-[#5E3A30] transition-colors">{exp.role}</h3>
-                    <span className="block text-lg font-normal text-[#707070] group-hover:text-[#9C6455]">{exp.company}</span>
-                 </div>
-               </div>
+              <div className="flex items-center gap-4 mb-2">
+                <div className="w-12 h-12 rounded-full overflow-hidden border border-[var(--card-bg)] hidden md:block group-hover:border-[var(--accent-1)] transition-colors">
+                  <img src={exp.image} alt={exp.company} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300 image-invert-wrapper" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-2xl text-[var(--text-main)] group-hover:text-[var(--accent-1)] transition-colors">{exp.role}</h3>
+                  <span className="block text-lg font-mono text-[var(--accent-2)] opacity-80 group-hover:opacity-100">{exp.company}</span>
+                </div>
+              </div>
             </div>
-            
-            <div className="md:col-span-5 text-[#707070] group-hover:text-[#0A0909] transition-colors leading-relaxed">
+
+            <div className="md:col-span-5 text-[var(--text-main)] opacity-70 group-hover:opacity-100 transition-opacity leading-relaxed">
               {exp.description}
             </div>
           </motion.div>

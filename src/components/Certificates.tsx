@@ -87,7 +87,7 @@ function CertCard({ cert, index }: CertCardProps) {
       onMouseEnter={() => setIsActive(true)}
       onMouseLeave={() => setIsActive(false)}
     >
-      <div className="relative overflow-hidden rounded-lg shadow-sm border border-[#E5E5E5] aspect-[4/3] mb-6 bg-gray-100">
+      <div className="relative overflow-hidden rounded-xl shadow-sm border border-[var(--card-bg)] group-hover:border-[var(--accent-1)] transition-colors duration-300 aspect-[4/3] mb-6 bg-[var(--card-bg)]">
         <motion.div
           animate={{ scale: isActive ? 1.05 : 1 }}
           transition={{ duration: 0.5 }}
@@ -110,12 +110,12 @@ function CertCard({ cert, index }: CertCardProps) {
         <div className="flex justify-between items-start gap-4">
           <h3
             className="text-xl font-bold transition-colors duration-300 line-clamp-2"
-            style={{ color: isActive ? '#9C6455' : 'inherit' }}
+            style={{ color: isActive ? 'var(--accent-1)' : 'var(--text-main)' }}
           >{cert.title}</h3>
-          <span className="text-[#707070] text-xs font-mono border border-[#707070] px-2 py-1 rounded-full whitespace-nowrap">{cert.date}</span>
+          <span className="text-[var(--text-main)] opacity-70 text-xs font-mono border border-[var(--text-main)] px-2 py-1 rounded-full whitespace-nowrap">{cert.date}</span>
         </div>
-        <p className="text-[#5E3A30] text-xs uppercase tracking-widest font-medium">{cert.issuer}</p>
-        <p className="text-[#707070] text-sm leading-relaxed line-clamp-3">{cert.description}</p>
+        <p className="text-[var(--accent-1)] text-xs uppercase tracking-widest font-medium">{cert.issuer}</p>
+        <p className="text-[var(--text-main)] opacity-70 text-sm leading-relaxed line-clamp-3">{cert.description}</p>
       </div>
     </motion.div>
   );
@@ -123,8 +123,8 @@ function CertCard({ cert, index }: CertCardProps) {
 
 export default function Certificates() {
   return (
-    <section id="certificates" className="py-24 px-6 md:px-12 lg:px-24 bg-[#FDFDFD]">
-      <MagicText text="Achievements & Certificates" tag="h2" className="text-4xl md:text-6xl font-bold tracking-tighter mb-16" />
+    <section id="certificates" className="py-24 px-6 md:px-12 lg:px-24 bg-[var(--bg-primary)] transition-colors duration-400">
+      <MagicText text="Achievements & Certificates" tag="h2" className="text-4xl md:text-6xl font-bold tracking-tighter mb-16 text-[var(--text-main)]" />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {certificates.map((cert, index) => (

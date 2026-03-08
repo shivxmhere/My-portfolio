@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
 import CustomCursor from './CustomCursor';
+import ThemeSwitcher from './ThemeSwitcher';
 import { motion } from 'motion/react';
 
 interface LayoutProps {
@@ -32,8 +33,11 @@ export default function Layout({ children }: LayoutProps) {
   }, []);
 
   return (
-    <div className="bg-[#FDFDFD] text-[#0A0909] min-h-screen font-sans selection:bg-[#CEB3A6] selection:text-[#0A0909]">
+    <div className="bg-[var(--bg-primary)] text-[var(--text-main)] min-h-screen font-sans selection:bg-[var(--accent-1)] selection:text-[var(--bg-primary)] transition-colors duration-400">
       <CustomCursor />
+      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex">
+        <ThemeSwitcher />
+      </div>
       <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

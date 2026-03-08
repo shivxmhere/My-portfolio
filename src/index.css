@@ -2,21 +2,48 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
+:root {
+  --bg-primary: #050d1a;
+  --accent-1: #00d4ff;
+  --accent-2: #7c3aed;
+  --text-main: #f0f6ff;
+  --card-bg: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] {
+  --bg-primary: #f8f5f0;
+  --accent-1: #e85d26;
+  --accent-2: #111111;
+  --text-main: #1a1a1a;
+  --card-bg: #ffffff;
+}
+
+[data-theme="hacker"] {
+  --bg-primary: #000000;
+  --accent-1: #00ff41;
+  --accent-2: #ff0080;
+  --text-main: #00ff41;
+  --card-bg: rgba(0, 255, 65, 0.05);
+}
+
+* {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
 @theme {
   --font-sans: "Inter", sans-serif;
   --font-serif: "Lora", serif;
 
-  --color-bg: #FDFDFD;
-  --color-text: #0A0909;
-  --color-muted: #707070;
-  --color-accent: #9C6455;
-  --color-accent-dark: #5E3A30;
-  --color-surface: #CEB3A6;
+  --color-bg-primary: var(--bg-primary);
+  --color-accent-1: var(--accent-1);
+  --color-accent-2: var(--accent-2);
+  --color-text-main: var(--text-main);
+  --color-card-bg: var(--card-bg);
 }
 
 body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -27,13 +54,13 @@ body {
 .cursor-dot {
   width: 10px;
   height: 10px;
-  background-color: var(--color-text);
+  background-color: var(--accent-1);
 }
 
 .cursor-outline {
   width: 40px;
   height: 40px;
-  border: 1px solid var(--color-text);
+  border: 1px solid var(--accent-1);
 }
 
 /* Lenis */
@@ -59,59 +86,35 @@ html.lenis {
 
 @keyframes magic-color {
   0% {
-    color: #ff0000;
-    text-shadow: 0 0 10px #ff0000;
+    color: var(--accent-1);
+    text-shadow: 0 0 10px var(--accent-1);
   }
 
-  15% {
-    color: #ff7f00;
-    text-shadow: 0 0 10px #ff7f00;
-  }
-
-  30% {
-    color: #ffff00;
-    text-shadow: 0 0 10px #ffff00;
-  }
-
-  45% {
-    color: #00ff00;
-    text-shadow: 0 0 10px #00ff00;
-  }
-
-  60% {
-    color: #00ffff;
-    text-shadow: 0 0 10px #00ffff;
-  }
-
-  75% {
-    color: #0000ff;
-    text-shadow: 0 0 10px #0000ff;
-  }
-
-  90% {
-    color: #9400d3;
-    text-shadow: 0 0 10px #9400d3;
+  50% {
+    color: var(--accent-2);
+    text-shadow: 0 0 10px var(--accent-2);
   }
 
   100% {
-    color: inherit;
-    text-shadow: none;
+    color: var(--accent-1);
+    text-shadow: 0 0 10px var(--accent-1);
   }
 }
 
 .magic-char {
-  animation: magic-color 1.5s ease-out forwards;
+  animation: magic-color 2s ease-in-out infinite alternate;
 }
 
-/* Dark Mode with Invert Strategy */
-html.dark {
-  filter: invert(1) hue-rotate(180deg);
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
-html.dark img,
-html.dark video,
-html.dark iframe,
-html.dark .no-invert,
-html.dark .image-invert-wrapper {
-  filter: invert(1) hue-rotate(180deg);
+.animate-shimmer {
+  animation: shimmer 6s linear infinite;
 }

@@ -10,21 +10,21 @@ const achievements = [
 
 export default function Achievements() {
   return (
-    <section className="py-24 bg-[#CEB3A6] text-[#0A0909] overflow-hidden">
+    <section id="achievements" className="py-24 bg-[var(--accent-1)] text-[var(--bg-primary)] overflow-hidden transition-colors duration-400">
       <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-16 px-6 md:px-12 lg:px-24">Honors & Awards</h2>
-      
+
       <div className="relative flex whitespace-nowrap overflow-hidden">
         <motion.div
           className="flex"
           animate={{ x: ["0%", "-100%"] }}
           transition={{ repeat: Infinity, duration: 60, ease: "linear" }}
         >
-          {[...achievements, ...achievements, ...achievements].map((item, index) => (
+          {[...achievements, ...achievements, ...achievements, ...achievements].map((item, index) => (
             <div key={index} className="flex items-center mx-8">
-              <span className="text-5xl md:text-8xl font-bold uppercase tracking-tighter opacity-80 hover:opacity-100 transition-opacity cursor-pointer">
+              <span className="text-5xl md:text-8xl font-bold uppercase tracking-tighter opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
                 {item}
               </span>
-              <span className="text-4xl mx-8">✦</span>
+              <span className="text-4xl mx-8 font-mono">✦</span>
             </div>
           ))}
         </motion.div>
