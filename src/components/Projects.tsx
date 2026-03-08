@@ -98,7 +98,7 @@ export default function Projects() {
                   <a href="https://github.com/shivxmhere" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-transparent border border-[var(--text-main)] rounded-md font-mono text-sm hover:border-[var(--accent-1)] hover:text-[var(--accent-1)] hover:shadow-[0_0_15px_var(--accent-1)] transition-all">
                     <Github size={18} /> GitHub ↗
                   </a>
-                  <a href="#" className="flex items-center gap-2 px-6 py-3 bg-[var(--accent-1)] text-[var(--bg-primary)] rounded-md font-mono text-sm font-bold shadow-[0_0_15px_transparent] hover:shadow-[0_0_20px_var(--accent-1)] transition-all">
+                  <a href="https://krishi-net-1-0.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-[var(--accent-1)] text-[var(--bg-primary)] rounded-md font-mono text-sm font-bold shadow-[0_0_15px_transparent] hover:shadow-[0_0_20px_var(--accent-1)] transition-all">
                     <ExternalLink size={18} /> Live Demo ↗
                   </a>
                 </div>

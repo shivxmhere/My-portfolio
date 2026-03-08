@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect } from 'react';
 import { Menu, X, Download } from 'lucide-react';
 import ThemeSwitcher from './ThemeSwitcher';
+import AnimatedProfileLogo from './AnimatedProfileLogo';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -60,20 +61,25 @@ export default function Header() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled
-            ? 'bg-[var(--bg-primary)]/80 backdrop-blur-[20px] border-b border-[var(--card-bg)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] py-4'
-            : 'bg-transparent py-6'
+          ? 'bg-[var(--bg-primary)]/80 backdrop-blur-[20px] border-b border-[var(--card-bg)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] py-4'
+          : 'bg-transparent py-6'
           }`}
       >
         <div className="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
 
           {/* Logo Left */}
-          <Link
-            to="/"
-            className="text-[var(--accent-1)] font-mono text-2xl font-bold tracking-widest hover:scale-105 transition-transform hover:shadow-[0_0_15px_var(--accent-1)] rounded"
-            onClick={() => window.scrollTo(0, 0)}
-          >
-            {`<SS />`}
-          </Link>
+          <div className="flex items-center gap-4">
+            <a href="#github" aria-label="Github Activity">
+              <AnimatedProfileLogo />
+            </a>
+            <Link
+              to="/"
+              className="text-[var(--accent-1)] font-mono text-2xl font-bold tracking-widest hover:scale-105 transition-transform hover:shadow-[0_0_15px_var(--accent-1)] rounded hidden sm:block"
+              onClick={() => window.scrollTo(0, 0)}
+            >
+              {`<SS />`}
+            </Link>
+          </div>
 
           {/* Links Right (Desktop) */}
           <div className="hidden lg:flex items-center gap-8">

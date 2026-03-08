@@ -10,6 +10,9 @@ export default function GithubActivity() {
                     <div>
                         <span className="text-[var(--accent-1)] font-mono text-[13px] tracking-widest">// 07. code_activity</span>
                         <h2 className="text-4xl md:text-[48px] font-bold tracking-tighter mt-2 font-[family-name:--font-display]">GitHub Activity</h2>
+                        <p className="text-[var(--text-muted)] text-md mt-2 font-mono max-w-xl">
+                            {'>'} Actively building in <span className="text-[var(--text-main)] font-bold">Python</span> and deepening knowledge in <span className="text-[var(--text-main)] font-bold">Data Structures & Algorithms (DSA)</span>.
+                        </p>
                     </div>
                     <a
                         href="https://github.com/shivxmhere"
