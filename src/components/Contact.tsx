@@ -6,25 +6,33 @@ export default function Contact() {
     const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setFormState('loading');
 
-        // Simulate API call (replace with Formspree / EmailJS)
-        const formData = new FormData(e.currentTarget);
-        const email = formData.get('email') as string;
+        try {
+            const formData = new FormData(e.currentTarget);
+            // Using FormSubmit.co for direct-to-email routing without backend
+            const response = await fetch("https://formsubmit.co/ajax/shivamhere6257@gmail.com", {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json'
+                },
+                body: formData
+            });
 
-        setTimeout(() => {
-            if (email && email.includes('error')) {
-                setFormState('error');
-                setErrorMessage('Failed to send message. Please try again.');
-                setTimeout(() => setFormState('idle'), 4000);
-            } else {
+            if (response.ok) {
                 setFormState('success');
                 setTimeout(() => setFormState('idle'), 4000);
                 (e.target as HTMLFormElement).reset();
+            } else {
+                throw new Error("Failed to send");
             }
-        }, 1500);
+        } catch (error) {
+            setFormState('error');
+            setErrorMessage('Failed to send message. Please try again.');
+            setTimeout(() => setFormState('idle'), 4000);
+        }
     };
 
     return (
@@ -170,10 +178,10 @@ export default function Contact() {
                         />
 
                         <SocialLink
-                            href="mailto:shivam.singh@example.com"
+                            href="mailto:shivamhere6257@gmail.com"
                             icon={<Mail size={28} />}
                             label="Email"
-                            sublabel="shivam.singh@example.com"
+                            sublabel="shivamhere6257@gmail.com"
                             hoverColor="group-hover:text-[#00d4ff] group-hover:border-[#00d4ff] group-hover:shadow-[0_0_20px_rgba(0,212,255,0.3)]"
                         />
                     </motion.div>

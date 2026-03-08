@@ -115,12 +115,11 @@ export default function GithubActivity() {
                             // Contribution Graph
                         </h3>
                         {/* We use the github chart API generated image with an invert wrapper if in dark mode so the greens pop accurately */}
-                        <div className="w-full flex justify-center min-w-[700px] bg-white rounded-md p-2">
+                        <div className="w-full flex justify-center min-w-[700px] rounded-md p-4">
                             <img
-                                src="https://ghchart.ssh.surf/shivxmhere"
+                                src="https://ghchart.rshah.org/shivxmhere"
                                 alt="GitHub Contribution Graph"
-                                className="w-full max-w-[900px] opacity-90 hover:opacity-100 transition-opacity"
-                                style={{ filter: "hue-rotate(0deg)" }}
+                                className="w-full max-w-[900px] hover:scale-[1.02] transition-transform duration-500 filter drop-shadow-[0_0_15px_rgba(var(--accent-1),0.1)] hue-rotate-[160deg] brightness-150 contrast-125"
                             />
                         </div>
                     </div>
