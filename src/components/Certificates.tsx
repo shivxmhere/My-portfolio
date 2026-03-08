@@ -91,7 +91,7 @@ function CertCard({ cert, index }: CertCardProps) {
         <motion.div
           animate={{ scale: isActive ? 1.05 : 1 }}
           transition={{ duration: 0.5 }}
-          className="w-full h-full"
+          className="w-full h-full image-invert-wrapper"
         >
           <img
             src={cert.image}

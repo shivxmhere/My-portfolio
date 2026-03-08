@@ -58,16 +58,60 @@ html.lenis {
 }
 
 @keyframes magic-color {
-  0% { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
-  15% { color: #ff7f00; text-shadow: 0 0 10px #ff7f00; }
-  30% { color: #ffff00; text-shadow: 0 0 10px #ffff00; }
-  45% { color: #00ff00; text-shadow: 0 0 10px #00ff00; }
-  60% { color: #00ffff; text-shadow: 0 0 10px #00ffff; }
-  75% { color: #0000ff; text-shadow: 0 0 10px #0000ff; }
-  90% { color: #9400d3; text-shadow: 0 0 10px #9400d3; }
-  100% { color: inherit; text-shadow: none; }
+  0% {
+    color: #ff0000;
+    text-shadow: 0 0 10px #ff0000;
+  }
+
+  15% {
+    color: #ff7f00;
+    text-shadow: 0 0 10px #ff7f00;
+  }
+
+  30% {
+    color: #ffff00;
+    text-shadow: 0 0 10px #ffff00;
+  }
+
+  45% {
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+  }
+
+  60% {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+  }
+
+  75% {
+    color: #0000ff;
+    text-shadow: 0 0 10px #0000ff;
+  }
+
+  90% {
+    color: #9400d3;
+    text-shadow: 0 0 10px #9400d3;
+  }
+
+  100% {
+    color: inherit;
+    text-shadow: none;
+  }
 }
 
 .magic-char {
   animation: magic-color 1.5s ease-out forwards;
+}
+
+/* Dark Mode with Invert Strategy */
+html.dark {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html.dark img,
+html.dark video,
+html.dark iframe,
+html.dark .no-invert,
+html.dark .image-invert-wrapper {
+  filter: invert(1) hue-rotate(180deg);
 }

@@ -145,20 +145,22 @@ export default function Hero() {
             className="absolute inset-0 rounded-lg pointer-events-none z-20"
           />
 
-          <motion.img
-            src="/profile-sticker.png"
-            alt="Shivam Singh"
-            initial={{ scale: 1.3, opacity: 0, filter: 'grayscale(1)' }}
-            animate={{
-              scale: 1,
-              opacity: 1,
-              filter: isHovered ? 'grayscale(0)' : 'grayscale(1)'
-            }}
-            transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 1.03 }}
-            className="w-full h-full object-cover object-top transition-all duration-700 rounded-lg relative z-10"
-          />
+          <div className="image-invert-wrapper w-full h-full absolute inset-0 rounded-lg pointer-events-none z-10">
+            <motion.img
+              src="/profile-sticker.png"
+              alt="Shivam Singh"
+              initial={{ scale: 1.3, opacity: 0, filter: 'grayscale(1)' }}
+              animate={{
+                scale: 1,
+                opacity: 1,
+                filter: isHovered ? 'grayscale(0)' : 'grayscale(1)'
+              }}
+              transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 1.03 }}
+              className="w-full h-full object-cover object-top transition-all duration-700 rounded-lg relative pointer-events-auto"
+            />
+          </div>
         </motion.div>
       </div>
     </section>
