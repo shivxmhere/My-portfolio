@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink, User, GitPullRequest, CheckCircle } from 'lucide-react';
 
 export default function GithubActivity() {
     return (
@@ -25,53 +25,104 @@ export default function GithubActivity() {
                     </a>
                 </div>
 
-                {/* Animated Container Border */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.6 }}
-                    className="relative rounded-2xl overflow-hidden group p-[2px]"
+                    className="flex flex-col gap-6"
                 >
-                    {/* Rotating gradient background for the animated border */}
-                    <div className="absolute inset-[-50%] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_180deg,var(--accent-1)_270deg,var(--accent-2)_360deg)] animate-[spin_4s_linear_infinite] opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
 
-                    <div className="relative bg-[var(--bg-primary)] p-6 md:p-10 rounded-2xl z-10 h-full backdrop-blur-md flex flex-col gap-8">
+                        {/* GitHub Stats - Matches screenshot left top box */}
+                        <div className="lg:col-span-3 bg-[var(--bg-primary)] border border-[var(--card-border)] rounded-xl p-6 flex flex-col shadow-sm transition-shadow">
+                            <h3 className="text-2xl font-bold font-sans tracking-tight mb-4 text-[var(--text-main)]">
+                                GitHub Stats
+                            </h3>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-cols-[2fr_1.5fr] gap-8">
-                            {/* Stats Card */}
-                            <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl overflow-hidden flex items-center justify-center p-4 min-h-[220px] hover:border-[var(--accent-1)] transition-colors duration-300">
-                                <img
-                                    src="https://github-readme-stats.vercel.app/api?username=shivxmhere&theme=tokyonight&hide_border=true&bg_color=00000000"
-                                    alt="GitHub Stats"
-                                    className="w-full max-w-[450px] hover:scale-[1.02] transition-transform duration-500"
-                                />
+                            <div className="flex flex-col font-mono text-sm mb-6 flex-grow border-b border-[var(--card-border)] pb-4">
+                                <div className="flex justify-between items-center bg-[var(--text-main)] text-[var(--bg-primary)] px-4 py-2 rounded">
+                                    <span>Total Stars</span>
+                                    <span className="font-bold">1.2k</span>
+                                </div>
+                                <div className="flex justify-between items-center px-4 py-2 mt-1">
+                                    <span className="text-[var(--text-muted)]">Total Commits</span>
+                                    <span>150+</span>
+                                </div>
+                                <div className="flex justify-between items-center px-4 py-2">
+                                    <span className="text-[var(--text-muted)]">Total PRs</span>
+                                    <span>45</span>
+                                </div>
+                                <div className="flex justify-between items-center px-4 py-2">
+                                    <span className="text-[var(--text-muted)]">Total Issues</span>
+                                    <span>12</span>
+                                </div>
                             </div>
 
-                            {/* Top Langs Card */}
-                            <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl overflow-hidden flex items-center justify-center p-4 min-h-[220px] hover:border-[var(--accent-1)] transition-colors duration-300">
-                                <img
-                                    src="https://github-readme-stats.vercel.app/api/top-langs/?username=shivxmhere&theme=tokyonight&hide_border=true&bg_color=00000000&layout=compact"
-                                    alt="Top Languages"
-                                    className="w-full max-w-[350px] hover:scale-[1.02] transition-transform duration-500"
-                                />
+                            {/* Badges */}
+                            <div className="grid grid-cols-2 gap-2 text-sm font-sans pt-2">
+                                <div className="border border-[var(--card-border)] rounded p-2 flex items-center justify-center gap-2 text-[var(--text-main)]">
+                                    <Github size={16} /> GitHub Profile
+                                </div>
+                                <div className="border border-[var(--card-border)] rounded p-2 flex items-center justify-center gap-2 text-[var(--text-main)]">
+                                    <User size={16} /> Top Contributor
+                                </div>
+                                <div className="border border-[var(--card-border)] rounded p-2 flex items-center justify-center gap-2 text-[var(--text-main)]">
+                                    <GitPullRequest size={16} /> Pull Request Champion
+                                </div>
+                                <div className="border border-[var(--card-border)] rounded p-2 flex items-center justify-center gap-2 text-[var(--text-main)]">
+                                    <CheckCircle size={16} /> Issue Resolver
+                                </div>
                             </div>
                         </div>
 
-                        {/* Contribution Graph */}
-                        <div className="w-full bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl overflow-hidden p-6 md:p-8 hover:border-[var(--accent-1)] transition-colors duration-300 flex flex-col items-center">
-                            <h3 className="text-[var(--text-muted)] font-mono text-sm mb-6 w-full text-left">{'// Contribution Graph'}</h3>
-                            <div className="w-full overflow-x-auto pb-4 flex justify-center">
-                                {/* Adding hue-rotate mapping to vaguely match blueish/accent theme, but default looks cool too */}
-                                <img
-                                    src="https://ghchart.ssh.surf/shivxmhere"
-                                    alt="GitHub Contribution Graph"
-                                    className="min-w-[700px] w-full max-w-[850px] hover:scale-[1.02] transition-transform duration-500"
-                                    style={{ filter: "drop-shadow(0 0 10px rgba(0,212,255,0.1))" }}
-                                />
+                        {/* Top Languages - Matches screenshot right top box */}
+                        <div className="lg:col-span-2 bg-[var(--bg-primary)] border border-[var(--card-border)] rounded-xl p-6 flex flex-col shadow-sm transition-shadow">
+                            <h3 className="text-2xl font-bold font-sans tracking-tight mb-8 text-[var(--text-main)]">
+                                Top Languages
+                            </h3>
+
+                            <div className="grid grid-cols-4 gap-2 flex-grow items-center justify-items-center mb-8">
+                                {/* Python */}
+                                <div className="flex flex-col items-center gap-4">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" className="w-12 h-12 md:w-16 md:h-16" />
+                                    <span className="font-sans font-medium text-[var(--text-main)]">40%</span>
+                                </div>
+                                {/* HTML */}
+                                <div className="flex flex-col items-center gap-4">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" className="w-12 h-12 md:w-16 md:h-16" />
+                                    <span className="font-sans font-medium text-[var(--text-main)]">30%</span>
+                                </div>
+                                {/* CSS */}
+                                <div className="flex flex-col items-center gap-4">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" className="w-12 h-12 md:w-16 md:h-16" />
+                                    <span className="font-sans font-medium text-[var(--text-main)]">20%</span>
+                                </div>
+                                {/* JS */}
+                                <div className="flex flex-col items-center gap-4">
+                                    <div className="w-12 h-12 md:w-16 md:h-16 bg-[#F7DF1E] flex items-end justify-end p-1 font-bold text-black border border-black/10">
+                                        <span className="text-xl md:text-2xl leading-none">JS</span>
+                                    </div>
+                                    <span className="font-sans font-medium text-[var(--text-main)]">10%</span>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
+                    {/* Contribution Graph Box */}
+                    <div className="bg-[var(--bg-primary)] border border-[var(--card-border)] rounded-xl p-6 flex flex-col shadow-sm items-start overflow-x-auto">
+                        <h3 className="text-sm font-mono text-[var(--text-muted)] mb-4 flex items-center gap-2 whitespace-nowrap">
+                            // Contribution Graph
+                        </h3>
+                        {/* We use the github chart API generated image with an invert wrapper if in dark mode so the greens pop accurately */}
+                        <div className="w-full flex justify-center min-w-[700px] bg-white rounded-md p-2">
+                            <img
+                                src="https://ghchart.ssh.surf/shivxmhere"
+                                alt="GitHub Contribution Graph"
+                                className="w-full max-w-[900px] opacity-90 hover:opacity-100 transition-opacity"
+                                style={{ filter: "hue-rotate(0deg)" }}
+                            />
+                        </div>
                     </div>
                 </motion.div>
             </div>

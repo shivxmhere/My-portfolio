@@ -69,9 +69,7 @@ export default function Header() {
 
           {/* Logo Left */}
           <div className="flex items-center gap-4">
-            <a href="#github" aria-label="Github Activity">
-              <AnimatedProfileLogo />
-            </a>
+            <AnimatedProfileLogo />
             <Link
               to="/"
               className="text-[var(--accent-1)] font-mono text-2xl font-bold tracking-widest hover:scale-105 transition-transform hover:shadow-[0_0_15px_var(--accent-1)] rounded hidden sm:block"
