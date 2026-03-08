@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shivamsingh-iit-patna-portfolio.vercel.app/sitemap.xml
+Sitemap: https://shivamsingh-iitpatna.vercel.app/sitemap.xml
